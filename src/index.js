@@ -5,7 +5,9 @@ import cookieParser from "cookie-parser";
 import connectDB from "./lib/db.js";
 import authRoute from "./routes/auth.router.js";
 import taskRoute from "./routes/task.router.js";
-dotenv.config();    
+import updateRoute from "./routes/update.router.js";
+
+dotenv.config();
 const app = express();
 
 app.use(express.json());
@@ -15,12 +17,13 @@ const PORT = process.env.PORT;
 
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/task", taskRoute);
+app.use("/api/v1/update", updateRoute);
 
-app.get('/', (req, res) => {
-    res.send("this is a test");
-})
+app.get("/", (req, res) => {
+  res.send("this is a test");
+});
 
 app.listen(PORT, () => {
-    console.log("Server is listening on port: ", PORT);
-    connectDB();
-})
+  console.log("Server is listening on port: ", PORT);
+  connectDB();
+});
